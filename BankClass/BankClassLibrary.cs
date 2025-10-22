@@ -13,16 +13,16 @@ namespace BankClass
         }
 
 
-        private string accountName; 
-        private decimal balance;
-        private string accountNumber;
+        private string accountName = "Jack"; 
+        private decimal balance = 500m;
+        private string accountNumber = "123456789";
         public string AccountName
         {
             set 
             {
                 while (value.Length <= 0)
                 {
-                    value = value += "This is invalid Account name";
+                    value = value += "*";
 
                 }
                 this.accountName = value;
@@ -56,7 +56,7 @@ namespace BankClass
                 {
                     value = value+= "0";
                 }
-                this.AccountNumber = value;
+                this.accountNumber = value;
             }
             get
             {
@@ -66,15 +66,19 @@ namespace BankClass
 
         // Methods
 
+        public void Credit (decimal amount)
+        {
+            if (amount < 0.0m)
+            {
+                return;
+            }
+        }
+
         public void Debit (decimal amount)
         {
-            if (amount > this.balance)
+            if (amount < 0.0m)
             {
-                Console.WriteLine("Insufficient funds.");
-            }
-            else
-            {
-                this.balance -= amount;
+               return;
             }
         }
 
