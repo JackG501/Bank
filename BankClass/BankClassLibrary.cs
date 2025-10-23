@@ -4,21 +4,24 @@ namespace BankClass
 {
     public class Bank
     {
-        
 
-        
-       public Bank(string accountName ="",decimal balance = 0.0m, string accountNumber ="123456789")
+
+
+        public Bank(string accountName = "", decimal balance = 0.0m, string accountNumber = "12345678")
         {
-            
+            this.AccountName = accountName;
+            this.Balance = balance;
+            this.AccountNumber = accountNumber;
+
         }
 
 
-        private string accountName = "Jack"; 
+        private string accountName = "Jack";
         private decimal balance = 500m;
         private string accountNumber = "123456789";
         public string AccountName
         {
-            set 
+            set
             {
                 while (value.Length <= 0)
                 {
@@ -35,11 +38,11 @@ namespace BankClass
 
         public decimal Balance
         {
-            set 
+            set
             {
-                while (value <0)
+                while (value < 0)
                 {
-                    value = 0;                
+                    value = 0;
                 }
             }
             get
@@ -50,11 +53,11 @@ namespace BankClass
 
         public string AccountNumber
         {
-            set 
+            set
             {
                 while (value.Length != 9)
                 {
-                    value = value+= "0";
+                    value = value += "0";
                 }
                 this.accountNumber = value;
             }
@@ -64,24 +67,47 @@ namespace BankClass
             }
         }
 
+        public string AccountInfo()
+        {
+            return $"{AccountName}, {AccountName}, {Balance:C}";
+        }
+
         // Methods
 
-        public void Credit (decimal amount)
+        public void Credit(decimal amount)
         {
             if (amount < 0.0m)
             {
-                return;
+                Balance += amount;
+                Console.WriteLine($"{amount} has been Creditted. New Balance {Balance}");
+            }
+            else
+            {
+                Console.WriteLine("Incorrect amount credited, It must be possitive");
             }
         }
 
-        public void Debit (decimal amount)
+        public virtual  Debit(decimal amount)
         {
             if (amount < 0.0m)
             {
-               return;
+                Console.WriteLine("Amount must be greater than zero.");
             }
-        }
+            else if (amount > Balance)
+            {
+                Console.WriteLine("Amount exceeded balance.");
+            }
+            else
+            {
+                balance -= amount;
+                Console.WriteLine($"{amount} has been debitted. Your new Balance is {Balance}");
+            }
+            {
+               
+            }
 
+        }
     }
 }
+
     
